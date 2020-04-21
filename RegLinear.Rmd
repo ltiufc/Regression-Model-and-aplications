@@ -1,0 +1,276 @@
+---
+title: "Análise de Regressão"
+output:
+  html_notebook: default
+  pdf_document: default
+  word_document: default
+  html_document:
+  df_print: paged
+---
+
+
+\newcommand{\bfbeta}{\hbox{$\boldsymbol \beta$}}
+\newcommand{\bfY}{\textbf{Y}}
+
+```{r include=FALSE}
+r = getOption("repos")
+r["CRAN"] = "http://cran.us.r-project.org"
+options(repos = r)
+install.packages("weatherData")
+```
+
+
+
+
+```{r include=FALSE}
+library(rmarkdown)
+if(!require(ggplot2)) install.packages("ggplot2");require(ggplot2) 
+if(!require(tidyverse)) install.packages("tidyverse");require(tidyverse) 
+if(!require(readxl)) install.packages("readxl");library(readxl)
+if(!require(dplyr)) install.packages("dplyr");library(dplyr)
+```
+
+
+
+```{r eval=FALSE, include=FALSE}
+setwd("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO")
+```
+
+
+
+
+```{r message=TRUE, warning=TRUE, include=FALSE, paged.print=TRUE}
+data22_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-22-01-2019.xlsx")
+
+data23_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-23-01-2019.xlsx")
+
+data24_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-24-01-2019.xlsx")
+
+data25_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-25-01-2019.xlsx")
+
+data26_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-26-01-2019.xlsx")
+
+data27_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-27-01-2019.xlsx")
+
+data28_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-28-01-2019.xlsx")
+
+data31_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-31-01-2019.xlsx")
+
+data01_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-1-02-2019.xlsx")
+
+data02_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-02-02-2019.xlsx")
+
+data03_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-03-02-2019.xlsx")
+
+data04_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-04-02-2019.xlsx")
+
+data05_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-05-02-2019.xlsx")
+
+data07_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-07-02-2019.xlsx")
+
+data08_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-08-02-2019.xlsx")
+
+data09_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-09-02-2019.xlsx")
+
+data10_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-10-02-2019.xlsx")
+
+data11_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-11-02-2019.xlsx")
+
+data12_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-12-02-2019.xlsx")
+
+data14_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-14-02-2019.xlsx")
+```
+
+
+```{r eval=FALSE, include=FALSE}
+#tables <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
+       #         data28_01,data31_01,data01_02,data02_02,data03_02,data04_02,
+        #        data05_02,data07_02,data08_02,data09_02,data10_02,data11_02,
+        #        data12_02,data14_02)
+
+```
+
+
+```{r include=FALSE}
+
+tabl <- rbind(data28_01)
+sq=seq(1,nrow(tabl),1)
+
+tabl=tabl[sq,]
+attach(tabl)
+vars=names(tabl)
+
+Al=as.numeric(`TOTAL FEED (ton/h) PV`)
+ind2=c(which(Al>10 & Al<110))
+y=as.numeric(`CEMENT MILL DP (mbar) PV`)[ind2]
+x=as.numeric(`MILL IN TEMP (C) PV`)[ind2]
+tipo=as.numeric(`cement type CPIV`)[ind2]
+Al=as.numeric(`TOTAL FEED (ton/h) PV`)[ind2]
+
+
+```
+
+
+
+```{r include=FALSE}
+ind=c(which(tipo==1) )
+
+df=data.frame(cbind(x,y,tipo, Al))
+
+dt=df[ind,]
+
+
+attach(dt)
+
+dt %>% filter(!is.na(x)); 
+dt %>% filter(!is.na(y))
+```
+
+
+Modelos de Regressão são utilizados para descrever o relacionamento de uma variável $y$ com outra (ou outras) variável $x$, por meio de uma relação matemática da forma 
+$$y = f(x;\bfbeta) + \textrm{erro}.$$ Quando a função $f$ é do tipo $$f(x;\bfbeta) = \beta_0 + \beta_1 x,$$ $\bfbeta=(\beta_0,\beta_1) \in \mathbb{R}^2$, tem-se um modelo de regressão linear simples. A variável $x$ é a variável independente do modelo, enquanto $y$  depende das variações de $x$, e é chamada de variável resposta. Assim, o modelo de regressão é chamado de simples quando envolve uma relação causal entre duas variáveis, $x$ e $y$. O modelo de regressão é múltiplo quando envolve uma relação causal entre mais de duas variáveis. Ou seja, quando a variação da resposta $y$ pode ser explicada por  mais de uma variável independente, $x_1,...,x_p$, que  são também denominadas variáveis explicativas ou covariáveis.
+
+
+
+
+
+
+
+Modelos de regressão podem ser aplicados em vários tipos de probelas.
+
+
+	
+1 -  Em problemas em que se deseja realizar previsões sobre o comportamento futuro de algum fenômeno, extrapolando-se para o futuro as relações de causa e efeito  observados no passado.
+	
+2 -  Quando é desejado observar  efeitos  causados por uma variável $x$ sobre outra variável (sobre a variável resposta) em decorrência de alterações introduzidas em seus valores.
+	
+	
+	
+	
+**Modelos de Regressão Linear Simples**
+
+Considere a variável Diferencial de Pressão e  a variável Temperatura Interna dos dados do moinho de cimento. Vamos assumir que y represente a variável Diferencial de Pressão (variável resposta) e x represente a variável Temperatura Interna do moinho (variável independente). Vamos considerar os valores das variáveis observados em um período de um dia (28/01/2019), considerando intervalos entre as coletas de três horas (3h). Essas dados são coletados ca cada 30min, no entanto esses valores podem conter uma dependência ao longo do tempo, que pode ser amenizada considerando um intervalo maior entre as coletas.
+
+
+```{r}
+
+lab=which(x==x)
+ggplot(df, aes(x= x, y= y, colour="green", label=lab))+
+  geom_point() +geom_text(aes(label=lab),hjust=0, vjust=0)
+```
+
+
+
+```{r}
+plot(x,y, xlab="MILL IN TEMP (C) PV", ylab="CEMENT MILL DP (mbar) PV")
+```
+
+
+
+
+Note que parece existir uma associação entre as a variáveis, pois a medida que x aumenta, a variável y parece tender a também aumentar. Se a relação existe, em geral, é desejado saber qual é a função que pode descrever o relacionamento. Neste caso, pode-se fazer a suposição inicial de que esta função seja uma reta, ou seja, pode-se supor que um mopdelo de regressão linear seja apropriado. Assim, o interesse é encontrar 
+
+
+
+
+
+
+
+**Modelos de Regressão Linear Múltiplo**
+
+
+
+O modelo de regressão linear múltiplo é expresso pela função linear: $$y = \beta_0 + \beta_1 x_1 + ... + \beta_p x_p + \varepsilon$$ 
+em que:
+
+$y$ é a variável resposta (variável dependente no modelo)
+	
+$x_1,...,x_p$ são as covariáveis (variáveis independentes ou explicativas),  supostamente independentes entre si;
+
+$\beta_0,...,\beta_p$ são os coeficientes da regressão;
+
+$\varepsilon$ é o erro aleatório.
+	
+
+
+Agora, considere uma amostra $y_1,...,y_n$ de $y$ em que cada $y_i$ está associado às $p$ variáveis explicativas, $x_i,x_{i1},...,x_{ip}$, $i=1,..,n$, assim pelo modelo $$y_i = \beta_0 + \beta_1x_{i1} + ... + \beta_px_{ip} + \varepsilon_i\,,$$
+$i=1,..,n$ e $n>p$, que pode ser visto como um modelo de regressão linear amostral.
+
+No modelo de regressão usual, os $\varepsilon_i$'s são variáveis aleatórias sujeitas as seguintes condições:
+
+  * $E[\varepsilon_i] = 0$;
+	* $Var(\varepsilon_i) = \sigma^2$;
+	* $Cov(\varepsilon_i,\varepsilon_j) = 0 \,, \forall i \neq j\,, j=1,...,n$.
+
+Note que, $x_{i1},...,x_{ip}$ são variáveis numéricas, não são variáveis aleatórias. No entanto, cada $y_i$ depende da quantidade aleatória $\varepsilon_i$ e portanto é uma variável aleatória. Assim, a média de $y_i$ é dada por: $$ E[y_i] = E[\beta_0 + \beta_1x_{i1} + ... + \beta_px_{ip} + \varepsilon_i] = \beta_0 + \beta_1x_{i1} + ... + \beta_px_{ip}$$
+e a variância é dada por: $$ Var(y_i) = Var(\beta_0 + \beta_1x_{i1} + ... + \beta_px_{ip} + \varepsilon_i) = \sigma^2, \ \ \  \forall i .$$
+
+Usando a notação matricial, o modelo é dado por:
+
+$$
+\begin{pmatrix}
+y_1 \\ y_2 \\ \vdots \\ y_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & x_{11} & x_{12} & \cdots & x_{1p} \\
+1 & x_{11} & x_{12} & \cdots & x_{1p} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & x_{n2} & \cdots & x_{np} \\
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0 \\ \beta_1 \\ \vdots \\ \beta_p
+\end{pmatrix}
++
+\begin{pmatrix}
+\varepsilon_1 \\ \varepsilon_2 \\ \vdots \\ \varepsilon_n
+\end{pmatrix}
+\Rightarrow
+\bfY = X  \beta+   \varepsilon
+$$
+
+A matriz $X$ de dimensão $n \times (p+1)$ e chamada de matriz de regressão quando $rank[X] = p+1$, e é chamada de matriz de delineamento quando $rank[X] = r < p+1$. A coluna de $1$'s na matriz refere-se ao intercepto, $\beta_0$. O vetor $Y$ de dimensão $n \times 1$ contém as variáveis $y_1,..,y_n$, $\beta$ é o vetor de dimensão $(p+1) \times 1$ dos coeficientes de regressão e $\varepsilon$ é o vetor de erros aleatórios de dimensão $n \times 1$.
+
+Conseqüentemente, $$E[{ \bf Y}] = E[X{ \bf \beta}+{ \bf \varepsilon}]$$ e 
+$$Var({ \bf Y}) = Var(X{ \bf \beta}+{ \bf \varepsilon}) = \sigma^2 I_n\,,$$ em que $I_n$ é a matriz identidade de dimensão $n \times n$.
+
+
+
+**Estimação por mínimos quadrados**
+
+
+O método de mínimos quadrados ($MMQ$) aplica-se somente aos parâmetros ${ \bf \beta} = (\beta_0,\beta_1,...,\beta_p)$, e é frequentemente aplicado em situações em que não se dispõe de mais especificações, além das que já foram feitas, sobre os erros. Este método consiste em estimar $\widehat{{ \bf \beta}} = (\widehat{\beta_0},\widehat{\beta_1},...,\widehat{\beta_p})$ por ${ \bf \beta} = (\beta_0,\beta_1,...,\beta_p)$ de modo que o vetor de valor esperado $E[{ \bf Y}] = X{ \bf \beta}$ esteja tão perto quanto possível do vetor de observações ${ \bf y}$ de ${ \bf Y}$. Ou seja, os estimadores de mínimos quadrados de $\beta_0,\beta_1,...,\beta_p$ devem minimizar a soma dos quadrados dos erros, dada por:
+
+$$U({ \bf \beta}) = \displaystyle\sum_{i=1}^n\varepsilon_i^2 = \displaystyle\sum_{i=1}^n(y - \beta_0 - \beta_1x_{i1} - ... - \beta_px_{ip})^2 = 
+{ \bf \varepsilon}^T{ \bf \varepsilon}$$
+
+Nota que $U({ \bf \beta})$ pode ser expresso por:
+$$U({ \bf \beta}) = { \bf Y}^T{ \bf Y} - { \bf \beta}^TX^T{ \bf Y} - { \bf Y}^TX{ \bf \beta} + { \bf \beta}^TX^TX{ \bf \beta} = { \bf Y}^T{ \bf Y} - 2{ \bf \beta}^TX^T{ \bf Y} + { \bf \beta}^TX^TX{ \bf \beta}$$
+
+Derivando $U({ \bf \beta})$ com respeito a ${ \bf \beta}$ e igualando  a zero, temos:
+$$\dfrac{\partial U({ \bf \beta})}{\partial { \bf \beta}} = - 2X^T{ \bf Y} + 2X^TX\widehat{{ \bf \beta}} = 0 \,,$$
+que resulta em:
+$$X^TX{ \bf \beta} = X^T{ \bf Y} \,,$$
+denominadas equações normais.
+
+Se $rank[X] = p+1$, $X^TX$ é positiva definida e, portanto,  inversível (não-singular). Assim, as equações normais possuem uma solução única dada por:
+$$\widehat{{ \bf \beta}} = (X^TX)^{-1}X^T{ \bf Y} \,,$$
+em que $\widehat{{ \bf \beta}}$ é o estimador de mínimos quadrados ($EMQ$) de $\beta$.
+
+O modelo de regressão ajustado, correspondente ao vetor, ${ \bf Y}$, é dado por:
+$$\widehat{{ \bf Y}} = X\widehat{{ \bf \beta}} = X(X^TX)^{-1}X^T{ \bf Y} = H{ \bf Y}\,.$$
+
+A matriz $H = X(X^TX)^{-1}X^T$ de dimensão $n \times n$ é geralmente chamada de matriz chapéu. Essa matriz possui algumas propriedades importantes que são enunciadas no teorema a seguir.
+
+
+
+Teorema $3.1$: Suponha que X é uma matriz $n \times (p+1)$ de $rank$ completo $p+1$. Então, 
+
+
+* $H$ e ($I_n - H$) são simétricas e idempotente;
+
+* $rank[I_n - H] = Tr[I_n - H] = n-(p+1) = n-p-1$;
+
+* $HX = X$.
+
+
