@@ -1,5 +1,5 @@
 ---
-title: "Análise de Regressão teste"
+title: "Análise de Regressão"
 output:
   pdf_document: default
   html_notebook: default
