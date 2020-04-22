@@ -1,16 +1,20 @@
 ---
 title: "Análise de Regressão"
 output:
-  html_notebook: default
   pdf_document: default
+  html_notebook: default
   word_document: default
   html_document:
   df_print: paged
 ---
 
 
+
 \newcommand{\bfbeta}{\hbox{$\boldsymbol \beta$}}
 \newcommand{\bfY}{\textbf{Y}}
+
+
+
 
 ```{r include=FALSE}
 r = getOption("repos")
@@ -28,12 +32,6 @@ if(!require(ggplot2)) install.packages("ggplot2");require(ggplot2)
 if(!require(tidyverse)) install.packages("tidyverse");require(tidyverse) 
 if(!require(readxl)) install.packages("readxl");library(readxl)
 if(!require(dplyr)) install.packages("dplyr");library(dplyr)
-```
-
-
-
-```{r eval=FALSE, include=FALSE}
-setwd("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO")
 ```
 
 
@@ -83,10 +81,12 @@ data14_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projeto
 
 
 ```{r eval=FALSE, include=FALSE}
-#tables <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
-       #         data28_01,data31_01,data01_02,data02_02,data03_02,data04_02,
-        #        data05_02,data07_02,data08_02,data09_02,data10_02,data11_02,
-        #        data12_02,data14_02)
+all.data <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
+                data28_01,data31_01,data01_02,data02_02,data03_02,data04_02,
+                data05_02,data07_02,data08_02,data09_02,data10_02,data11_02,
+               data12_02,data14_02)
+
+View(all.data)
 
 ```
 
@@ -106,7 +106,6 @@ y=as.numeric(`CEMENT MILL DP (mbar) PV`)[ind2]
 x=as.numeric(`MILL IN TEMP (C) PV`)[ind2]
 tipo=as.numeric(`cement type CPIV`)[ind2]
 Al=as.numeric(`TOTAL FEED (ton/h) PV`)[ind2]
-
 
 ```
 
@@ -153,7 +152,6 @@ Considere a variável Diferencial de Pressão e  a variável Temperatura Interna
 
 
 ```{r}
-
 lab=which(x==x)
 ggplot(df, aes(x= x, y= y, colour="green", label=lab))+
   geom_point() +geom_text(aes(label=lab),hjust=0, vjust=0)
