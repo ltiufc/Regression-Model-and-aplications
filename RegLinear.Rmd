@@ -1,10 +1,10 @@
 ---
 title: "Análise de Regressão"
 output:
-  html_document:
+  pdf_document: default
   html_notebook: default
   word_document: default
-  pdf_document: default
+  html_document:
   df_print: paged
 ---
 
