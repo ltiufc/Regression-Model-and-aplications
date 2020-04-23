@@ -1,10 +1,10 @@
 ---
 title: "Análise de Regressão"
 output:
-  pdf_document: default
+  html_document:
   html_notebook: default
   word_document: default
-  html_document:
+  pdf_document: default
   df_print: paged
 ---
 
@@ -38,55 +38,55 @@ if(!require(dplyr)) install.packages("dplyr");library(dplyr)
 
 
 ```{r message=TRUE, warning=TRUE, include=FALSE, paged.print=TRUE}
-data22_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-22-01-2019.xlsx")
+#data22_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-22-01-2019.xlsx")
 
-data23_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-23-01-2019.xlsx")
+#data23_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-23-01-2019.xlsx")
 
-data24_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-24-01-2019.xlsx")
+#data24_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-24-01-2019.xlsx")
 
-data25_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-25-01-2019.xlsx")
+#data25_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-25-01-2019.xlsx")
 
-data26_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-26-01-2019.xlsx")
+#data26_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-26-01-2019.xlsx")
 
-data27_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-27-01-2019.xlsx")
+#data27_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-27-01-2019.xlsx")
 
-data28_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-28-01-2019.xlsx")
+data28_01 <- read_excel("/media/denise/HD/Ciencia-da-Computacao/LTI/Projeto Apodi/analiseFinuraCimento/Dados CMO/Mill_Data-28-01-2019.xlsx")
 
-data31_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-31-01-2019.xlsx")
+#data31_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-31-01-2019.xlsx")
 
-data01_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-1-02-2019.xlsx")
+#data01_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-1-02-2019.xlsx")
 
-data02_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-02-02-2019.xlsx")
+#data02_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-02-02-2019.xlsx")
 
-data03_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-03-02-2019.xlsx")
+#data03_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-03-02-2019.xlsx")
 
-data04_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-04-02-2019.xlsx")
+#data04_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-04-02-2019.xlsx")
 
-data05_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-05-02-2019.xlsx")
+#data05_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-05-02-2019.xlsx")
 
-data07_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-07-02-2019.xlsx")
+#data07_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-07-02-2019.xlsx")
 
-data08_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-08-02-2019.xlsx")
+#data08_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-08-02-2019.xlsx")
 
-data09_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-09-02-2019.xlsx")
+#data09_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-09-02-2019.xlsx")
 
-data10_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-10-02-2019.xlsx")
+#data10_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-10-02-2019.xlsx")
 
-data11_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-11-02-2019.xlsx")
+#data11_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-11-02-2019.xlsx")
 
-data12_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-12-02-2019.xlsx")
+#data12_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-12-02-2019.xlsx")
 
-data14_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-14-02-2019.xlsx")
+#data14_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-14-02-2019.xlsx")
 ```
 
 
 ```{r eval=FALSE, include=FALSE}
-all.data <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
+#all.data <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
                 data28_01,data31_01,data01_02,data02_02,data03_02,data04_02,
                 data05_02,data07_02,data08_02,data09_02,data10_02,data11_02,
                data12_02,data14_02)
 
-View(all.data)
+#View(all.data)
 
 ```
 
@@ -148,7 +148,7 @@ Modelos de regressão podem ser aplicados em vários tipos de probelas.
 	
 **Modelos de Regressão Linear Simples**
 
-Considere a variável Diferencial de Pressão e  a variável Temperatura Interna dos dados do moinho de cimento. Vamos assumir que y represente a variável Diferencial de Pressão (variável resposta) e x represente a variável Temperatura Interna do moinho (variável independente). Vamos considerar os valores das variáveis observados em um período de um dia (28/01/2019), considerando intervalos entre as coletas de três horas (3h). Essas dados são coletados ca cada 30min, no entanto esses valores podem conter uma dependência ao longo do tempo, que pode ser amenizada considerando um intervalo maior entre as coletas.
+Considere a variável Diferencial de Pressão e  a variável Temperatura Interna dos dados do moinho de cimento. Vamos assumir que y represente a variável Diferencial de Pressão (variável resposta) e x represente a variável Temperatura Interna do moinho (variável independente). Vamos considerar os valores das variáveis observados em um período de um dia (28/01/2019), considerando intervalos entre as coletas de três horas (3h). Essas dados são coletados a cada 30min, no entanto esses valores podem conter uma dependência ao longo do tempo, que pode ser amenizada considerando um intervalo maior entre as coletas.
 
 
 ```{r}
@@ -166,14 +166,15 @@ plot(x,y, xlab="MILL IN TEMP (C) PV", ylab="CEMENT MILL DP (mbar) PV")
 
 
 
-Note que parece existir uma associação entre as a variáveis, pois a medida que x aumenta, a variável y parece tender a também aumentar. Se a relação existe, em geral, é desejado saber qual é a função que pode descrever o relacionamento. Neste caso, pode-se fazer a suposição inicial de que esta função seja uma reta, ou seja, pode-se supor que um mopdelo de regressão linear seja apropriado. Assim, o interesse é encontrar 
+Note que parece existir uma associação entre as a variáveis, pois a medida que x aumenta, a variável y parece tender a também aumentar. Se a relação existe, em geral, é desejado saber qual é a função que pode descrever o relacionamento. Neste caso, pode-se fazer a suposição inicial de que esta função seja uma reta, ou seja, pode-se supor que um modelo de regressão linear seja apropriado. Assim, o interesse é aproximar os dados a melhor reta possível, para tentar prever o comportamento da variável x em função de y.
 
-
-
-
-
-
-
+Para mostrar a função da reta que melhor decreve os dados deve-se fazer a aproximação dos betas, que seguem as seguintes funções:
+$$\hat{\beta_0} = \frac{n \cdot \sum x_iy_i-\sum x_i \cdot \sum y_i}{n \cdot \sum x_i^2 -( \sum x_i)^2}$$
+$$\hat{\beta_1} = \overline{y}-\hat{\beta_0}\cdot\overline{x}$$
+ Para aproximação do $\beta_1$ será necessário o valor das medias amostrais, que serão expressa pelas seguintes fórmulas:
+  $$\overline{x} = \frac{\sum x_i}{n}$$
+ 
+ $$\overline{y} = \frac{\sum y_i}{n}$$
 **Modelos de Regressão Linear Múltiplo**
 
 
