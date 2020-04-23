@@ -38,45 +38,45 @@ if(!require(dplyr)) install.packages("dplyr");library(dplyr)
 
 
 ```{r message=TRUE, warning=TRUE, include=FALSE, paged.print=TRUE}
-#data22_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-22-01-2019.xlsx")
+data22_01 <- read_excel("Dados CMO/Mill_Data-22-01-2019.xlsx")
 
-#data23_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-23-01-2019.xlsx")
+data23_01 <- read_excel("Dados CMO/Mill_Data-23-01-2019.xlsx")
 
-#data24_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-24-01-2019.xlsx")
+data24_01 <- read_excel("Dados CMO/Mill_Data-24-01-2019.xlsx")
 
-#data25_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-25-01-2019.xlsx")
+data25_01 <- read_excel("Dados CMO/Mill_Data-25-01-2019.xlsx")
 
-#data26_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-26-01-2019.xlsx")
+data26_01 <- read_excel("Dados CMO/Mill_Data-26-01-2019.xlsx")
 
-#data27_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-27-01-2019.xlsx")
+data27_01 <- read_excel("Dados CMO/Mill_Data-27-01-2019.xlsx")
 
-data28_01 <- read_excel("/media/denise/HD/Ciencia-da-Computacao/LTI/Projeto Apodi/analiseFinuraCimento/Dados CMO/Mill_Data-28-01-2019.xlsx")
+data28_01 <- read_excel("Dados CMO/Mill_Data-28-01-2019.xlsx")
 
-#data31_01 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-31-01-2019.xlsx")
+data31_01 <- read_excel("Dados CMO/Mill_Data-31-01-2019.xlsx")
 
-#data01_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-1-02-2019.xlsx")
+data01_02 <- read_excel("Dados CMO/Mill_Data-1-02-2019.xlsx")
 
-#data02_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-02-02-2019.xlsx")
+data02_02 <- read_excel("Dados CMO/Mill_Data-02-02-2019.xlsx")
 
-#data03_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-03-02-2019.xlsx")
+data03_02 <- read_excel("Dados CMO/Mill_Data-03-02-2019.xlsx")
 
-#data04_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-04-02-2019.xlsx")
+data04_02 <- read_excel("Dados CMO/Mill_Data-04-02-2019.xlsx")
 
-#data05_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-05-02-2019.xlsx")
+data05_02 <- read_excel("Dados CMO/Mill_Data-05-02-2019.xlsx")
 
-#data07_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-07-02-2019.xlsx")
+data07_02 <- read_excel("Dados CMO/Mill_Data-07-02-2019.xlsx")
 
-#data08_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-08-02-2019.xlsx")
+data08_02 <- read_excel("Dados CMO/Mill_Data-08-02-2019.xlsx")
 
-#data09_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-09-02-2019.xlsx")
+data09_02 <- read_excel("Dados CMO/Mill_Data-09-02-2019.xlsx")
 
-#data10_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-10-02-2019.xlsx")
+data10_02 <- read_excel("Dados CMO/Mill_Data-10-02-2019.xlsx")
 
-#data11_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-11-02-2019.xlsx")
+data11_02 <- read_excel("Dados CMO/Mill_Data-11-02-2019.xlsx")
 
-#data12_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-12-02-2019.xlsx")
+data12_02 <- read_excel("Dados CMO/Mill_Data-12-02-2019.xlsx")
 
-#data14_02 <- read_excel("G:/Meu Drive/0 UFC/0 PROJETOS/0 Lab_UFC/Lab_LTI/Projetos_Dados/Apodi/Dados Apodi/Dados CMO/Mill_Data-14-02-2019.xlsx")
+data14_02 <- read_excel("Dados CMO/Mill_Data-14-02-2019.xlsx")
 ```
 
 
