@@ -81,15 +81,50 @@ data14_02 <- read_excel("Dados CMO/Mill_Data-14-02-2019.xlsx")
 
 
 ```{r eval=FALSE, include=FALSE}
-#all.data <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
+all.data <- rbind(data22_01,data23_01,data24_01,data25_01,data26_01,data27_01,
                 data28_01,data31_01,data01_02,data02_02,data03_02,data04_02,
                 data05_02,data07_02,data08_02,data09_02,data10_02,data11_02,
                data12_02,data14_02)
 
-#View(all.data)
+View(all.data)
+
+attach(all.data)
 
 ```
 
+
+```{r}
+Y = as.numeric(`TOTAL FEED (ton/h) PV`)
+X = as.numeric(`TOTAL FEED (ton/h) SP`)
+
+dados <- data.frame(Y,X)
+
+```
+
+```{r}
+modelo.regressao <- lm(Y ~ X, data= dados)
+summary(modelo.regressao)
+
+anova(modelo.regressao)
+
+```
+
+```{r}
+plot (Y ~ X,pch=16 ,data = dados)
+abline(modelo.regressao,col="red")
+
+```
+
+
+```{r}
+plot(resid(modelo.regressao) ~ predict(modelo.regressao),pch=16) # Resíduos vs. Y esperado
+abline(0,0,col="red") 
+
+```
+
+```{r}
+plot(modelo.regressao)
+```
 
 ```{r include=FALSE}
 
